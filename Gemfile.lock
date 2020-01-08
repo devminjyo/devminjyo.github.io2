@@ -66,8 +66,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.0.1)
+  bundler (~> 2.1.4)
   just-the-docs!
 
 BUNDLED WITH
-   2.0.1
+   2.1.4
