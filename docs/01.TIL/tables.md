@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tables
-parent: 01. TIL
+parent: 01.TIL
 nav_order: 4
 ---
 
