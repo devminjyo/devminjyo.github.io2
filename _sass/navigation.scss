@@ -40,7 +40,7 @@
   margin: 0;
 
   @include mq(md) {
-    @include fs-3;
+    @include fs-6; // nav 글자 크기 
   }
 
   .navigation-list-child-list {
@@ -49,7 +49,7 @@
 
   &.active {
     .navigation-list-child-list {
-      display: block;
+      display: none; // main nav를 눌렀을때 하위 nav가 생기는 것
     }
   }
 }
