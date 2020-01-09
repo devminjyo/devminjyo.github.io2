@@ -1,6 +1,6 @@
 ---
 layout: default
-title: UI Components
+title: 01. TIL
 nav_order: 1
 has_children: true
 permalink: /docs/01. TIL
