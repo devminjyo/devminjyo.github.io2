@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Labels
-parent: UI Components
+parent: 01. TIL
 nav_order: 3
 ---
 

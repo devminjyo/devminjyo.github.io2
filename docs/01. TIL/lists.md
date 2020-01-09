@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Lists
-parent: UI Components
+parent: 01. TIL
 nav_order: 5
 ---
 
