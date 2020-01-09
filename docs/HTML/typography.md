@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Typography
-parent: TIL
+parent: HTML
 nav_order: 1
 ---
 

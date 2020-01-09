@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Labels
-parent: TIL
+parent: HTML
 nav_order: 3
 ---
 

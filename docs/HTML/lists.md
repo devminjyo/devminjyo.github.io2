@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Lists
-parent: TIL
+parent: HTML
 nav_order: 5
 ---
 
