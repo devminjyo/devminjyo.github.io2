@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 01.TIL
+title: TIL
 nav_order: 1
 has_children: true
-permalink: /docs/01.TIL
+permalink: /docs/TIL
 ---
 
 # UI Components

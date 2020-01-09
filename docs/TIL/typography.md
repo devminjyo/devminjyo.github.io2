@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Typography
-parent: 01.TIL
+parent: TIL
 nav_order: 1
 ---
 

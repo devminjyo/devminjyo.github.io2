@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Code
-parent: 01.TIL
+parent: TIL
 nav_order: 6
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Labels
-parent: 01.TIL
+parent: TIL
 nav_order: 3
 ---
 
