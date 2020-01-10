@@ -1,0 +1,92 @@
+---
+layout: default
+title: 장고 migrations 충돌시 해결방법(한곳으로 모으는거 다시 코드 확인해야함)
+parent: Django
+nav_order: 4
+---
+
+### 장고 migrations 충돌시 해결방법
+
+```
+members
+└───migrations
+    │   0001_initial.py
+    │   0002_user_img_profile.py
+    │   0002_user_img_file.py
+```
+
+위 상황이라고 해보자, 위 상황에서 해결방법은 2가지이다.
+
+
+
+##### 1.  첫번째 방법 : migrations 파일의 dependencies를 수정 및 숫자 변경
+
+예시 코드)
+
+```python
+# 0002_user_img_profile.py
+class Migration(migrations.Migration):
+	
+    dependencies = [
+        ('members', '0001_initial'),
+    ]
+    
+    operations = [
+        migrations.AddField(
+        	model_name='user',
+        	name='img_profile',
+        	field=models.ImageField(blank=True, upload_to='users/'),
+        ),
+    ]
+```
+
+```python
+# 0002_user_img_profile.py ---> 0003_user_img_profile.py으로 이름 수정
+class Migration(migrations.Migration):
+    
+    dependencies = [
+        # ('members', '0001_initial'), 현재 파일이 전 0002 마이그레이션 파일을 의존하게함
+        ('members', '0002_user_img_profile.py')
+    ]
+    
+    operation = [
+        migrations.AddField(
+        	model_name='user',
+        	name='img_profile',
+        	field=models.ImageField(blank=True, upload_to='users/'),
+        )
+    ]
+```
+
+
+
+### 2. 두번째 방법 : 
+
+### operations를 한곳으로 몰고 operations를 한곳으로 모은 migrations를 제외한 다른 하나를 제거
+
+```python
+from django.db import migrations, models
+
+class Migration(migrations.Migration):
+	dependencies = [
+        ('members', '0001_initial'),
+    ]
+    
+    operations = [
+        # 0002_user_img_profile.py 에서 가져온 부분 시작
+        migrations.AddField(
+        	model_name='user',
+        	name='img_profile',
+        	field=models.ImageField(blank=True, upload_to='user/'),
+        ),
+        # 0002_user_img_profile.py 에서 가져온 부분 끝
+        
+        # 0002_user_img_file.py 에서 가져온 부분 시작
+        migrations.AddField(
+        	model_name='user',
+        	name='img_profile',
+        	field=models.ImageField(blank=True, upload_to='users/'),
+        ),
+        # 0002_user_img_file.py 에서 가져온 부분 끝
+    ]
+```

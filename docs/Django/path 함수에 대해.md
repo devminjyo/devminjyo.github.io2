@@ -1,0 +1,32 @@
+---
+layout: default
+title: path 함수에 대해
+parent: Django
+nav_order: 5
+---
+
+### path() 함수에 대해
+
+urlpatterns에 포함 할 요소를 반환합니다.
+
+
+
+예제코드)
+
+```python
+urlpatterns = [
+    path('articles/<slug:title>/<int:section>/', views.section, name='article-section'),
+    path('weblog/', include('blog.urls')),
+]
+```
+
+위 코드에서
+
+1. `<int:section>`은 10진수 문자열과 일치하고 값을 int로 변환합니다.  
+
+2. `include()` 는 이 위치에 "포함" 되어야 하는 다른 URLconf 모듈에 대한 전체 Python 가져오기 경로를 취하는 함수
+
+   선택적으로 항목이 포함될 애플리케이션의 네임 스페이스 및 인스턴스 네임 스페이스도 지정할 수 있습니다.
+
+
+

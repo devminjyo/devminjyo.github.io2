@@ -1,0 +1,69 @@
+---
+layout: default
+title: field정리
+parent: Django
+nav_order: 1
+---
+# Model field reference
+
+### 1. ImageFIeld
+
+1. 형태
+
+   ```python
+   class ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options)
+   ```
+
+   
+
+2. 특징
+
+   2.1. FileFIeld에서 모든 속성과 메소드를 상속
+
+   2.2. 업로드 된 객체가 유효한 이미지인지 확인
+
+   2.3. FileField에 사용 가능한 특수 속성 외에도 ImageField에는 높이 및 너비 속성이 추가
+
+   2.4. Pillow 라이브러리가 필요
+
+   2.5. ImageField 인스턴스는 데이터베이스에서 기본 최대 길이가 100자인 varchar 열로 만들어짐
+
+   ​	   다른 필드와 마찬가지로 max_length 인수를 사용하여 최대 길이 변경 가능
+
+   2.6 이 필드의 기본 양식 위젯은 ClearableFileInput
+
+   2.7. 이러한 속성에 대한 쿼리를 용이하게하기 위해 ImageField에는 두 개의 추가 선택적 인수가 존재
+
+   ​	2.7.1. ImageField.height_field
+
+   ​		모델 인스턴스가 저장 될 때마다 이미지의 높이에 자동으로 채워지는 모델 필드의 이름
+
+   ​	2.7.2. ImageField.width_field
+
+   ​		모델 인스턴스가 저장 될 때마다 이미지 너비로 자동 채워지는 모델 필드의 이름
+
+   ​		 
+   
+3. 예제)
+
+   
+
+   예제코드)
+
+   ```python
+   # 예제코드
+   class User(AbstractUser)
+   	img_profile = models.ImageField('프로필이미지', blank=True), upload_to='/usersadf
+   ```
+
+
+
+​	예제코드 결과)
+
+​	![field정리(그림1)](/assets/images/Django/field정리(그림1).png)
+
+​	![field정리(그림2)](/assets/images/Django/field정리(그림2).png)
+
+localhost:8000/admin에서 사용자 추가되었을때 프로필 이미지 칸이 생성되는걸 확인할 수 있었고
+
+장고 데이터베이스에 연결된 SQLite에서 members_user라는 테이블에 들어가 봤을때 img_profile이라는 컬럼이 추가된것을 확인할 수 있음.
