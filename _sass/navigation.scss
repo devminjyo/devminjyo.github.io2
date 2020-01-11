@@ -49,7 +49,7 @@
 
   &.active {
     .navigation-list-child-list {
-      display: block;
+      display: none; // main nav를 눌렀을때 하위 nav가 생기는 것
     }
   }
 }
