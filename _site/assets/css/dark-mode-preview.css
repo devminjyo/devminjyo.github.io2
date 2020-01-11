@@ -159,12 +159,11 @@ hr { height: 1px; padding: 0; margin: 2rem 0; background-color: #44434d; border:
 
 .side-bar { z-index: 100; display: flex; flex-wrap: wrap; background-color: #27262b; }
 @media (min-width: 50rem) { .side-bar { flex-wrap: nowrap; position: absolute; width: 248px; height: 100%; flex-direction: column; border-right: 1px solid #44434d; align-items: flex-end; } }
-@media (min-width: 66.5rem) { .side-bar { width: calc((100% - 1064px) / 2 + 264px); min-width: 264px; } }
+@media (min-width: 66.5rem) { .side-bar { min-width: 264px; } }
 
 @media (min-width: 50rem) { .main-content-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow-x: hidden; overflow-y: scroll; } }
 
-@media (min-width: 50rem) { .main-content { position: relative; max-width: 800px; margin-left: 248px; } }
-@media (min-width: 66.5rem) { .main-content { margin-left: calc((100% - 1064px) / 2 + 264px); } }
+@media (min-width: 50rem) { .main-content { position: relative; margin-left: 248px; } }
 
 .js-main-content:focus { outline: none; }
 

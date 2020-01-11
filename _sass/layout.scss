@@ -32,7 +32,8 @@
   }
 
   @include mq(lg) {
-    width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
+    // 2020-01-12 네비게이션 매뉴 칸 줄이기 위해서 주석처리함
+    // width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
     min-width: $nav-width;
   }
 }
@@ -53,12 +54,14 @@
 .main-content {
   @include mq(md) {
     position: relative;
-    max-width: $content-width;
+    // 2020-01-12 content 칸 늘리기 위해서 주석처리함
+    // max-width: $content-width;
     margin-left: $nav-width-md;
   }
 
   @include mq(lg) {
-    margin-left: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
+    // 2020-01-12 content 칸을 늘리기위해서 주석처리함
+    // margin-left: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
   }
 }
 
