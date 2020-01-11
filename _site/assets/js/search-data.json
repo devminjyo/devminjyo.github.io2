@@ -1,400 +1,418 @@
 {
   
   "0": {
+    "title": "01. field정리",
+    "content": "Model field reference . 1. ImageFIeld . 형태 . class ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options) . | 특징 . 2.1. FileFIeld에서 모든 속성과 메소드를 상속 . 2.2. 업로드 된 객체가 유효한 이미지인지 확인 . 2.3. FileField에 사용 가능한 특수 속성 외에도 ImageField에는 높이 및 너비 속성이 추가 . 2.4. Pillow 라이브러리가 필요 . 2.5. ImageField 인스턴스는 데이터베이스에서 기본 최대 길이가 100자인 varchar 열로 만들어짐 . ​ 다른 필드와 마찬가지로 max_length 인수를 사용하여 최대 길이 변경 가능 . 2.6 이 필드의 기본 양식 위젯은 ClearableFileInput . 2.7. 이러한 속성에 대한 쿼리를 용이하게하기 위해 ImageField에는 두 개의 추가 선택적 인수가 존재 . ​ 2.7.1. ImageField.height_field . ​ 모델 인스턴스가 저장 될 때마다 이미지의 높이에 자동으로 채워지는 모델 필드의 이름 . ​ 2.7.2. ImageField.width_field . ​ 모델 인스턴스가 저장 될 때마다 이미지 너비로 자동 채워지는 모델 필드의 이름 . ​ . | 예제) . 예제코드) . # 예제코드 class User(AbstractUser) img_profile = models.ImageField(&#39;프로필이미지&#39;, blank=True), upload_to=&#39;/usersadf . | ​ 예제코드 결과) . ​ . ​ . localhost:8000/admin에서 사용자 추가되었을때 프로필 이미지 칸이 생성되는걸 확인할 수 있었고 . 장고 데이터베이스에 연결된 SQLite에서 members_user라는 테이블에 들어가 봤을때 img_profile이라는 컬럼이 추가된것을 확인할 수 있음. .",
+    "url": "http://localhost:4000/docs/Django/01.%20field%EC%A0%95%EB%A6%AC/",
+    "relUrl": "/docs/Django/01.%20field%EC%A0%95%EB%A6%AC/"
+  }
+  ,"1": {
     "title": "01. 구글 번역기 사용 및 shortcut 지정방법",
     "content": "구글 번역기 사용 및 shortcut 지정방법 . chrome extension 접속 . | Google Translate 찾아서 Add to Chrome 클릭 . | 브라우저 메뉴에 점 3개 (메뉴바) 클릭 - More tools 클릭 - Extensions 클릭 . | 왼쪽 상단에 메뉴 클릭 - Keyboard shortcuts 클릭 . | Type a shortcut 란에 shortcut 지정 . | Google Translate의 Details버튼 클릭 - Extension options 클릭 . | My primary language를 Korean으로 수정 - save버튼 클릭 . |",
     "url": "http://localhost:4000/docs/etc/01.%20%EA%B5%AC%EA%B8%80%20%EB%B2%88%EC%97%AD%EA%B8%B0%20%EC%82%AC%EC%9A%A9%20%EB%B0%8F%20shortcut%20%EC%A7%80%EC%A0%95%EB%B0%A9%EB%B2%95/",
     "relUrl": "/docs/etc/01.%20%EA%B5%AC%EA%B8%80%20%EB%B2%88%EC%97%AD%EA%B8%B0%20%EC%82%AC%EC%9A%A9%20%EB%B0%8F%20shortcut%20%EC%A7%80%EC%A0%95%EB%B0%A9%EB%B2%95/"
   }
-  ,"1": {
+  ,"2": {
     "title": "01. 깃 예전 버전으로 되돌리는 법",
     "content": "$ git clone 깃 저장소 주소 cd 프로젝트명 git reset --hard 커밋해시 .",
     "url": "http://localhost:4000/docs/Git/01.%20%EA%B9%83%20%EC%98%88%EC%A0%84%20%EB%B2%84%EC%A0%84%EC%9C%BC%EB%A1%9C%20%EB%90%98%EB%8F%8C%EB%A6%AC%EB%8A%94%20%EB%B2%95/",
     "relUrl": "/docs/Git/01.%20%EA%B9%83%20%EC%98%88%EC%A0%84%20%EB%B2%84%EC%A0%84%EC%9C%BC%EB%A1%9C%20%EB%90%98%EB%8F%8C%EB%A6%AC%EB%8A%94%20%EB%B2%95/"
   }
   ,"3": {
+    "title": "02. InlineModelAdmin objects",
+    "content": "InlineModelAdmin objects . 관리자 인터페이스는 상위 모델과 동일한 페이지에서 모델을 편집 할 수 있습니다. . 예제코드) . # Instagram/app/posts/models.py from django.db import models class Author(models.Model): content = models.TextField(blank=True) class Book(models.Model): author = models.ForeignKey(Author, on_delete=models.CASCADE) . # Instagram/app/posts/admin.py from django.contrib import admin from .models import Author, Book class BookInline(admin.TabularInline): model = Book # 어느 모델을 가져올 것인지 extra = 1 # 여분 작성 항목은 몇개를 기본으로 표시할것인지 @admin.register(Author) class AuthorAdmin(admin.ModelAdmin): inlines = [ BookInline, # 해당 클래스를 인라인으로 추가한다. ] @admin.register(Book) class BookAdmin(admin.ModelAdmin): pass . 예제코드의 결과) . .",
+    "url": "http://localhost:4000/docs/Django/02.%20InlineModelAdmin%20objects/",
+    "relUrl": "/docs/Django/02.%20InlineModelAdmin%20objects/"
+  }
+  ,"4": {
+    "title": "03. list_display,list_display_links정리",
+    "content": "list_display 옵션 . 각 어플리케이션의 모델의 인스턴스에서 나타낼 컬럼값을 표현 . 예시코드) . # Instagram/app/posts/admin.py from django.contrib import admin from .model import Post, PostImage, PostComment, PostLike @admin.register(Post) class PostAdmin(admin.ModelAdmin): list_display = (&#39;author&#39;, &#39;content&#39;, &#39;test1&#39;, &#39;created&#39;) . 예시 코드의 결과 사진) . . list_display_links 옵션 . 목록 내에서 링크로 지정할 필드 목록 (이를 지정하지 않으면, 첫번째 필드에만 링크가 적용) . 예시코드) . # Instagram/app/posts/admin.py from django.contrib import admin from .model import Post, PostImage, PostComment, PostLike @admin.register(Post) class PostAdmin(admin.ModelAdmin): list_display = (&#39;author&#39;, &#39;content&#39;, &#39;test1&#39;, &#39;created&#39;) list_display_links = (&#39;author&#39;, &#39;content&#39;, &#39;created&#39;) . 예시 코드의 결과 사진) . .",
+    "url": "http://localhost:4000/docs/Django/03.%20list_display,list_display_links%EC%A0%95%EB%A6%AC/",
+    "relUrl": "/docs/Django/03.%20list_display,list_display_links%EC%A0%95%EB%A6%AC/"
+  }
+  ,"5": {
+    "title": "04. 장고 migrations 충돌시 해결방법(한곳으로 모으는거 다시 코드 확인해야함)",
+    "content": "장고 migrations 충돌시 해결방법 . members └───migrations │ 0001_initial.py │ 0002_user_img_profile.py │ 0002_user_img_file.py . 위 상황이라고 해보자, 위 상황에서 해결방법은 2가지이다. . 1. 첫번째 방법 : migrations 파일의 dependencies를 수정 및 숫자 변경 . 예시 코드) . # 0002_user_img_profile.py class Migration(migrations.Migration): dependencies = [ (&#39;members&#39;, &#39;0001_initial&#39;), ] operations = [ migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ), ] . # 0002_user_img_profile.py &gt; 0003_user_img_profile.py으로 이름 수정 class Migration(migrations.Migration): dependencies = [ # (&#39;members&#39;, &#39;0001_initial&#39;), 현재 파일이 전 0002 마이그레이션 파일을 의존하게함 (&#39;members&#39;, &#39;0002_user_img_profile.py&#39;) ] operation = [ migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ) ] . 2. 두번째 방법 : . operations를 한곳으로 몰고 operations를 한곳으로 모은 migrations를 제외한 다른 하나를 제거 . from django.db import migrations, models class Migration(migrations.Migration): dependencies = [ (&#39;members&#39;, &#39;0001_initial&#39;), ] operations = [ # 0002_user_img_profile.py 에서 가져온 부분 시작 migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;user/&#39;), ), # 0002_user_img_profile.py 에서 가져온 부분 끝 # 0002_user_img_file.py 에서 가져온 부분 시작 migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ), # 0002_user_img_file.py 에서 가져온 부분 끝 ] .",
+    "url": "http://localhost:4000/docs/Django/04.%20%EC%9E%A5%EA%B3%A0%20migrations%20%EC%B6%A9%EB%8F%8C%EC%8B%9C%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95(%ED%95%9C%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%AA%A8%EC%9C%BC%EB%8A%94%EA%B1%B0%20%EB%8B%A4%EC%8B%9C%20%EC%BD%94%EB%93%9C%20%ED%99%95%EC%9D%B8%ED%95%B4%EC%95%BC%ED%95%A8)/",
+    "relUrl": "/docs/Django/04.%20%EC%9E%A5%EA%B3%A0%20migrations%20%EC%B6%A9%EB%8F%8C%EC%8B%9C%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95(%ED%95%9C%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%AA%A8%EC%9C%BC%EB%8A%94%EA%B1%B0%20%EB%8B%A4%EC%8B%9C%20%EC%BD%94%EB%93%9C%20%ED%99%95%EC%9D%B8%ED%95%B4%EC%95%BC%ED%95%A8)/"
+  }
+  ,"6": {
+    "title": "05. path 함수에 대해",
+    "content": "path() 함수에 대해 . urlpatterns에 포함 할 요소를 반환합니다. . 예제코드) . urlpatterns = [ path(&#39;articles/&lt;slug:title&gt;/&lt;int:section&gt;/&#39;, views.section, name=&#39;article-section&#39;), path(&#39;weblog/&#39;, include(&#39;blog.urls&#39;)), ] . 위 코드에서 . &lt;int:section&gt;은 10진수 문자열과 일치하고 값을 int로 변환합니다. . | include() 는 이 위치에 “포함” 되어야 하는 다른 URLconf 모듈에 대한 전체 Python 가져오기 경로를 취하는 함수 . 선택적으로 항목이 포함될 애플리케이션의 네임 스페이스 및 인스턴스 네임 스페이스도 지정할 수 있습니다. . |",
+    "url": "http://localhost:4000/docs/Django/05.%20path%20%ED%95%A8%EC%88%98%EC%97%90%20%EB%8C%80%ED%95%B4/",
+    "relUrl": "/docs/Django/05.%20path%20%ED%95%A8%EC%88%98%EC%97%90%20%EB%8C%80%ED%95%B4/"
+  }
+  ,"7": {
+    "title": "06. 새로운 QuerySet을 반환하는 메소드",
+    "content": "https://docs.djangoproject.com/en/3.0/ref/models/querysets/#filter . 새로운 QuerySet을 반환하는 메소드 . Django는 QuerySet에서 반환 된 결과 유형이나 SQL 쿼리 방식을 수정하는 다양한 QuerySet 구체화 방법을 제공합니다. . 1. filter() . 형태) . filter(**kwargs) . 주어진 조회 매개 변수와 일치하는 객체를 포함하는 새로운 QuerySet을 반환합니다. . 조회 매개변수 (** kwargs)는 아래의 필드 조회에 설명 된 형식이어야 합니다. 기본 SQL 문에서 AND를 통해 여러 매개 변수가 결합됩니다. . 보다 복잡한 쿼리 (예 : OR 문이있는 쿼리)를 실행해야하는 경우 Q 개체를 사용할 수 있습니다. . 예제) . ​ 예제의 데이터베이스 테이블) . . . . &gt;&gt;&gt; post=Post.objects.get(pk=3) &gt;&gt;&gt; user=User.objects.get(pk=1) &gt;&gt;&gt; post_like_qs=PostLike.objects.filter(post=post, user=user) &gt;&gt;&gt; post_like_qs &lt;QuerySet [&lt;PostLike: PostLike object (2)&gt;]&gt; .",
+    "url": "http://localhost:4000/docs/Django/06.%20%EC%83%88%EB%A1%9C%EC%9A%B4%20QuerySet%EC%9D%84%20%EB%B0%98%ED%99%98%ED%95%98%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/",
+    "relUrl": "/docs/Django/06.%20%EC%83%88%EB%A1%9C%EC%9A%B4%20QuerySet%EC%9D%84%20%EB%B0%98%ED%99%98%ED%95%98%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/"
+  }
+  ,"8": {
+    "title": "07. QuerySet를 리턴하지 않는 메소드",
+    "content": "QuerySet를 리턴하지 않는 메소드 . 위 문서는 https://docs.djangoproject.com/en/3.0/ref/models/querysets/ 를 참조하였습니다. . 다음 QuerySet 메소드는 QuerySet을 평가하고 QuerySet 이외의 것을 리턴합니다. . 이러한 메소드는 캐시를 사용하지 않습니다. (캐싱 및 Queryset 참조) . 메소드는 호출될때마다 데이터베이스를 쿼리합니다. . . 01. get() . 형태) . get(**kwargs) . 주어진 조회 매개 변수와 일치하는 객체를 반환합니다. . 이 조회 매개 변수는 필드 조회에 설명 된 형식이어야 합니다. . get()은 여러 객체를 찾은 경우 . MultipleObjectsReturned를 발생시킵니다. . MultipleObjectsReturned 예외는 모델 클래스의 속성입니다. . 지정된 매개 변수에 대해 개체를 찾지 못하면 get() 에서 DoesNotExist 예외를 발생시킵니다. 이 예외는 모델 클래스의 속성입니다. . 예제 코드) . # 예제 코드 Entry.objects.get(id=&#39;foo&#39;) # 예제 코드의 결과 raises Entrys.DoesNotExist . DoesNotExist 예외는 django.core.exceptions.ObjectDoesNotExist에서 상속되므로 여러 DoesNotExist 예외를 대상으로 할 수 있습니다. . 예제 코드) . # Post 모델에 pk=2인 인스턴스가 없다고 가정 # 예제코드 from django.core.exceptions import ObjectDoesNotExist try: post = Post.objects.get(pk=2) except ObjectDoesNotExist: print(&quot;Either the entry or blog doesn&#39;t exist.&quot;) # 예제코드 결과 Either the entry or blog doesn&#39;t exist . 쿼리 셋이 하나의 행을 반환 할 것으로 예상되면 인수없이 get()을 사용하여 해당 행의 객체를 반환 할 수 있습니다. . 예제 코드) . # 예제코드 Post.objects.get() # 예제코드 결과 &lt;Post: minjyo | 2020-01-10 05:09:29.247590+00:00&gt; . . 02. create() . 형태) . create(**kwargs) . 객체를 생성하고 한 번에 모두 저장하는 편리한 방법이다. 따라서 . . # 첫번째 예제코드 p = Person.objects.create(first_name=&quot;jyo&quot;, last_name=&quot;Min&quot;) # 두번째 예제코드 p = Person(first_name=&quot;jyo&quot;, last_name=&quot;Min&quot;) p.save(force_insert=True) . 첫번째 예제코드 와 두번째 예제코드 는 같은 동작을 한다. . . 02-1. force_insert 매개변수 . force_insert 매개 변수는 다른곳에 문서화되어 있지만 항상 새 객체가 작성된다는 의미입니다. . 그러나 모델에 설정 한 수동 기본 키 값이 포함되어 있고 해당 값이 데이터베이스에 이미 존재하는 경우 기본 키는 고유해야하므로 . IntegrityError와 함께 create() 호출이 실패합니다. 수동 기본 키를 사용하는 경우 예외를 처리 할 준비를 하십시오. . . 03. get_or_create() . 형태) . get_or_create(defaults=None, **kwargs) . 주어진 kwags로 객체를 찾는 편리한 방법이다. . (모델에 모든 필드에 대한 기본값이 있는 경우 비어 있을 수 있음), 필요한 경우 하나를 만듬 . (object, created) 튜플을 반환합니다. . 여기서 object는 검색 또는 생성 된 객체이며 created는 새 객체 생성 여부를 지정하는 부울 입니다. . 예제) . ​ 예제의 데이터베이스 기본구조) . ​ . # 예제코드1 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user,content=&quot;content1&quot;, test1=&quot;test1&quot;) # 예제코드1 결과 (&lt;Post: minjyo | 2020-01-10 12:09:43.727018+00:00&gt;, True) . 예제코드1에 따른 변경된 데이터베이스 테이블) ​ . . # 예제코드2 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user,content=&quot;content2&quot;, test1=&quot;test2&quot;) # 예제코드2 결과 (&lt;Post: minjyo | 2020-01-10 12:14:32.555263+00:00&gt;, True) . 예제코드2에 따른 변경된 데이터베이스 테이블) . . # 예제코드3 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user, content=&quot;content2&quot;, test1=&quot;test2&quot;) # 예제코드3 결과 (&lt;Post: minjyo | 2020-01-10 12:14:32.555263+00:00&gt;, False) . 예제코드3에 따른 데이터베이스(객체가 생성되지 않았기 때문에 기존 데이터베이스에서 달라진 부분없음) . 이는 요청이 병렬로 작성 될 때 및 중복 코드에 대한 바로 가기로 중복 오브젝트가 작성된는 것을 방지하기 위한것입니다. . try: obj = Person.objects.get(first_name=&#39;John&#39;, last_name=&#39;Lennon&#39;) except Person.DoesNotExist: obj = Person(first_name=&#39;John&#39;, last_name=&#39;Lennon&#39;, birthday=data(1940,10,9)) obj.save() . 여기서 동시 요청으로 동일한 매개 변수를 사용하여 개인을 저장하려는 여러 번의 시도가 이루어질 수 있습니다. . 이 경쟁 조건을 피하기 위해 get_or_create()를 사용하여 위 예제를 다시 작성할수 있습니다. . obj, create = Person.objects.get_or_create( first_name= &#39;John&#39;, last_name= &#39;Lennon&#39;, defaults={&#39;birthday&#39;: date(1940, 10, 9)}, ) . 선택 사항 인 defaults를 제외하고 get_or_create()에 전달 된 키워드 인수는 get() 호출에 사용됩니다. . 객체가 발견되면 get_or_create()는 해당 객체의 튜플과 False를 반환합니다. . get_or_create()를 filter()와 연결하고 Q객체를 사용하여 검색된 객체에 대해 보다 복잡한 조건을 지정할 수 있습니다. . 예를 들어 Robert 또는 Bob Marley(있는 경우)를 검색하고 그렇지 않은 경우 후자를 작성하십시오. . from django.db models import Q obj, created = Person.objects.filter( Q(first_name=&#39;Bob&#39;) | Q(first_name=&#39;Robert&#39;), ).get_or_create(last_name=&#39;Marley&#39;, defaults={&#39;first_name&#39;: &#39;Bob&#39;}) . 만약 여러 객체가 발견되면 get_or_create()는 MultipleObjectsReturned를 발생시킵니다. . 객체를 찾지 못하면 get_or_create()는 새 객체를 인스턴스화하고 저장하여 새 객체의 튜플과 True를 반환합니다. . get_or_create() 메소드는 수동으로 지정된 기본키를 사용하는 경우 create()와 유사한 오류 동작을 갖습니다. 개체를 만들어야하고 키가 이미 데이터베이스에 있으면 IntegrityError가 발생합니다. . 마지막으로 Django 뷰에서 get_or_create() 사용에 대한 단어. 특별한 이유가 없는 한 POST 요청에서만 사용해야 한다. . GET 요청은 데이터에 영향을 미치지 않아야 합니다. . 대신 페이지 요청이 데이터에 부작용이 있을 때마다 POST를 사용하십시오. 자세한 내용은 HTTP 사양의 안전한 방법을 참조하십시오. . Warning . ManyToManyField 속성 및 역관계를 통해 get_or_create ()를 사용할 수 있습니다. 이 경우 해당 관계의 컨텍스트 내에서 쿼리를 제한합니다. 일관성있게 사용하지 않으면 무결성 문제가 발생할 수 있습니다. . 모델이 다음과 같을때 . class Chapter(models.Model): title = models.CharField(max_length=255, unique=True) class Book(models.models.Model): title = models.CharField(max_length=256) chapters = models.ManyToManyField(Chapter) . 도서의 chapter 필드를 통해 get_or_create()를 사용할 수 있지만 해당 도서의 컨텍스트 내에서만 가져옵니다. . &gt;&gt;&gt; book = Book.objects.create(title=&#39;Ulysses&#39;) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Telemachus&quot;) (&lt;Chapter: Telemachus&gt;, True) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Telemachus&quot;) (&lt;Chapter: Telemachus&gt;, False) &gt;&gt;&gt; Chapter.objects.create(title=&quot;Chapter1&quot;) (&lt;Chapter: Chapter 1&gt;) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Chapter1&quot;) # Raises IntegrityError . . exists() . QuerySet에 결과가 있으면 True를, 그렇지 않으면 False를 리턴합니다. . 가장 간단하고 빠른 방법으로 쿼리를 수행하려고 시도하지만 일반 QuerySet 쿼리와 거의 동일한 쿼리를 실행합니다. . exists()는 QuerySet의 개체 멤버 자격과 QuerySet의 개체 존재, 특히 큰 QuerySet의 컨텍스트와 관련된 검색에 유용합니다. . 고유 필드를 가진 모델이 QuerySet의 멤버인지 확인하는 가장 효율적인 방법은 다음과 같습니다. . entry = Entry.objects.get(pk=123) if some_queryset.filter(pk=entry.pk).exists(): print(&quot;Entry contained in queryset&quot;) . 전체 쿼리 집합을 평가하고 반복 해야하는 다음보다 빠르다. . if entry in some_queryset: print(&quot;Entry contained in QuerySet&quot;) . 그리고 쿼리 셋에 아이템이 포함되어 있는지 확인하려면 . if some_queryset.exists(): print(&quot;There is at least one object in some_queryset&quot;) . 위 코드가 아래 코드보다 빠르다. . if some_queryset: print(&quot;There is at least one object in some_queryset&quot;) . 그러나 크게는 아닙니다 (따라서 효율성을 높이기 위해 큰 쿼리 집합이 필요함) . 또한 some_queryset이 아직 평가되지 않았지만 어느 시점에 있다는 것을 알고 있다면 some_queryset.exists ()를 사용하면 더 많은 전반적인 작업을 수행합니다 (존재 검사에 대한 하나의 쿼리와 나중에 결과를 검색하기위한 여분의 쿼리) )를 사용하는 것보다 bool (some_queryset)을 사용하여 결과를 검색 한 다음 반환 된 것이 있는지 확인합니다. .",
+    "url": "http://localhost:4000/docs/Django/07.%20QuerySet%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/",
+    "relUrl": "/docs/Django/07.%20QuerySet%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/"
+  }
+  ,"9": {
+    "title": "08. 파이썬 패키지 환경을 쉽게 관리할 수 있도록 하는 requirements.txt",
+    "content": "파이썬 패키지 환경을 쉽게 관리할 수 있도록 하는 requirements.txt . . 자신이 구성한 환경을 requirements.txt로 만드는 명령어 | . $ pip freeze &gt; requirements.txt . . requirements.txt를 통해 지정한 환경에 설치하는 명령어 | . $ pip install -r requirements.txt .",
+    "url": "http://localhost:4000/docs/Django/08.%20%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%ED%8C%A8%ED%82%A4%EC%A7%80%20%ED%99%98%EA%B2%BD%EC%9D%84%20%EC%89%BD%EA%B2%8C%20%EA%B4%80%EB%A6%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%ED%95%98%EB%8A%94%20requirements.txt/",
+    "relUrl": "/docs/Django/08.%20%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%ED%8C%A8%ED%82%A4%EC%A7%80%20%ED%99%98%EA%B2%BD%EC%9D%84%20%EC%89%BD%EA%B2%8C%20%EA%B4%80%EB%A6%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%ED%95%98%EB%8A%94%20requirements.txt/"
+  }
+  ,"10": {
+    "title": "09. 필요한 모듈을 자동으로 import 하고 jupyter notebook 실행",
+    "content": "필요한 모듈을 자동으로 import 하고 jupyter notebook 실행 . manage.py shell_plus --notebook . 필요한 모듈을 자동으로 import하고 shell_plus 실행 . manage.py shell_plus .",
+    "url": "http://localhost:4000/docs/Django/09.%20%ED%95%84%EC%9A%94%ED%95%9C%20%EB%AA%A8%EB%93%88%EC%9D%84%20%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C%20import%20%ED%95%98%EA%B3%A0%20jupyter%20notebook%20%EC%8B%A4%ED%96%89/",
+    "relUrl": "/docs/Django/09.%20%ED%95%84%EC%9A%94%ED%95%9C%20%EB%AA%A8%EB%93%88%EC%9D%84%20%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C%20import%20%ED%95%98%EA%B3%A0%20jupyter%20notebook%20%EC%8B%A4%ED%96%89/"
+  }
+  ,"11": {
+    "title": "10. Django shortcut function",
+    "content": "Django shortcut functions . django.shortcuts 패키지는 여러 레벨의 MVC를 “span”하는 헬퍼 함수와 클래스를 수집합니다. 즉, 이러한 기능, 클래스는 편의를 위해 제어 된 커플링을 도입합니다. . render() . 형태 : . render(request, template_name, context=None, content_type=None, status=None, using=None) . 주어진 템플릿을 주어진 컨텍스트 사전과 결합하고 렌더링 된 텍스트가 있는 HttpResponse 객체가 반환된다. . Django는 TemplateResponse의 생성자가 render()와 동일한 수준의 편의성을 제공하기 때문에 TemplateResponse를 반환하는 바로 가기 함수를 제공하지 않습니다. . | 필요한 인수: . request : . 이 응답을 생성하는 데 사용 된 요청 개체입니다. . | template_name : . 사용할 템플리트의 전체 이름 또는 일련의 템플리트이름. 시퀸스가 제공되면 존재하는 첫 번째 템플릿이 사용됩니다. 템플릿을 찾는 방법에 대한 자세한 내용은 템플릿로드 설명서를 참조하십시오. . | | 선택적 인수 . context . 템플릿 컨텍스트에 추가 할 값 사전입니다. 기본적으로 이것은 빈 사전입니다. . 사전의 값을 호출 할 수 있으면 보기는 템플리트를 렌더링하기 직전에 값을 호출합니다. . | content_type . 결과 문서에 사용할 MIME 유형입니다. 기본적으로 ‘text’ / ‘html’ . | status . 응답의 상태 코드입니다. 기본값은 200입니다. . | using . 템플릿을 로드하는 데 사용할 템플릿 엔진의 이름입니다. . | | 예제 . 다음 예제는 myapp / index.html 템플리트를 MIME 유형 application / xhtml + xml로 렌더링합니다. . from django.shortcuts import render def my_view(request): # View code here... return render( request, &#39;myapp/index.html&#39;, {&#39;foo&#39;: &#39;bar&#39;,}, content_type=&#39;application/xhtml+xml&#39; ) . 위 예제는 다음과 같다. . from django.http import HttpResponse from django.template import loader def my_view(request): # View code here... t = loader.get_template(&#39;myapp/index.html&#39;) c = {&#39;foo&#39;, &#39;bar&#39;} return HttpResponse(t.render(c, request), content_type=&#39;application/xhtml+xml&#39;) . | . redirect() . 형태 : . redirect(to, *args, permanent=False, **kwargs) . 전달 된 인수에 대한 적절한 URL로 HttpResponseRedirect를 리턴합니다. . 인수는 다음과 같습니다. . 모델 : 모델의 get_absolute_url() 함수가 호출됩니다. . | 인수가 있는 뷰 이름 : reverse() 를 사용하여 이름을 역 확인합니다. | 경로 재 지정 위치에 그대로 사용되는 절대 또는 상대 URL | 기본적으로 임시 리디렉션이 실행됩니다. 영구적 인재 지정을 발행하려면 permanent = True를 전달하십시오. . | 예제 : . redirect () 함수는 여러 가지 방법으로 사용할 수 있습니다. . 어떤 대상을 전달함으로써; 리디렉션 URL을 파악하기 위해 해당 객체의 get_absolute_url () 메소드가 호출됩니다. . from django.shortcuts import redirect def my_view(request): ... obj = MyModel.objects.get(...) return redirect(obj) . | 뷰의 이름과 선택적으로 위치 또는 키워드 인수를 전달합니다. URL은 reverse() 메소드를 사용하여 반대로 해석됩니다. . def my_view(request): ... return redirect(&#39;some-view-name&#39;, foo=&#39;bar&#39;) . | 하드 코드 된 URL을 전달하여 다음으로 리디렉션 . def my_view(request): ... return redirect(&#39;/some/url/&#39;) . 이것은 전체 URL에서도 작동합니다. . def my_view(request): ... return redirect(&#39;https://example.com/&#39;) . | 기본적으로 redirect ()는 임시 리디렉션을 반환합니다. 위의 모든 형태는 영구적인 주장을 받아들입니다. . True로 설정하면 영구 리디렉션이 반환됩니다. . def my_view(request): ... obj = MyModel.objects.get(...) return redirect(obj, permanent=True) . | . . get_object_or_404() . 형태 : . get_object_or_404(klass, *args, **kwargs) . 지정된 모델 관리자에서 get ()을 호출하지만 모델의 DoesNotExist 예외 대신 Http404가 발생합니다. . | 필수 인수 . klass . 개체를 가져올 Model 클래스, Manage 또는 QuerySet 인스턴스입니다. . | **kwargs . 조회 매개 변수인 get() 및 filter()에서 허용하는 형식이어야 합니다. . | | 예제 . 다음 예제는 MyModel에서 기본 키가 1인 객체를 가져옵니다. . from django.shortcuts import get_object_or_404 def my_view(request): obj = get_object_or_404(MyModel, pk=1) . 이 예는 다음과 같습니다. . from django.http import Http404 def my_view(request): try: obj = MyModel.objects.get(pk=1) except MyModel.DoesNotExist: raise Http404(&quot;No MyModel matches the given query.&quot;) . 가장 일반적인 사용 사례는 위에 표시된 것처럼 모델을 전달하는 것입니다. . 그러나 QuerySet 인스턴스를 전달할 수 도 있습니다. . queryset = Book.objects.filter(title__startswith=&#39;M&#39;) get_object_or_404(queryset, pk=1) . 위의 예는 다음과 같은 점에서 약간 고안되었습니다. . get_object_or_404(Book, title__startswith=&#39;M&#39;, pk=1) . 그러나 다른 곳에서 queryset 변수를 전달하면 유용 할 수 있습니다. . 마지막으로 관리자를 사용할 수도 있습니다. 예를 들어 사용자 정의 관리자가 있는 경우 유용합니다. . get_object_or_404(Book, dahl_objects, title=&#39;Matilda&#39;) . 관련 관리자를 사용할 수도 있습니다. . author = Author.objects.get(name=&#39;Roald Dahl&#39;) get_object_or_404(author.book_set, title=&#39;Matilda&#39;) . 참고 : get () 과 마찬가지로 둘 이상의 객체가 발견되면 MultipleObjectsReturned 예외가 발생합니다. . | . . get_list_or_404 . 형태) . get_list_or_404(klass, *args, **kwargs) . 주어진 모델 관리자에 대한 filter () 결과를 목록으로 캐스트하고 결과 목록이 비어 있으면 Http404를 발생시킵니다. . 필수 인수 . klass . 목록을 가져올 Model, Manager 또는 QuerySet 인스턴스입니다. . | **kwargs . 조회 매개 변수인 get () 및 filter ()에서 허용하는 형식이어야 합니다. . | | 예제 . 다음 예제는 MyModel에서 게시 된 모든 객체를 가져옵니다. . from django.shortcuts import get_list_or_404 def my_view(request): my_objects = get_list_or_404(MyModel, published=True) . 이 예는 다음 예와 같습니다. . from django.http import Http404 def my_view(request): my_objects = list(MyModel.objects.filter(published=True)) if not my_objects: raise Http404(&quot;No MyModel matches the given query.&quot;) . | .",
+    "url": "http://localhost:4000/docs/Django/10.%20Django%20shortcut%20function/",
+    "relUrl": "/docs/Django/10.%20Django%20shortcut%20function/"
+  }
+  ,"12": {
+    "title": "11. 모델 queryset을 통한 CRUD",
+    "content": "모델 queryset을 통한 CRUD . 위 문서는 아래 문서를 참조하였습니다. . https://wayhome25.github.io/django/2017/04/01/django-ep9-crud/ . Model Manager . Model Manager . 데이터베이스 질의 인터페이스를 제공 . 디폴트 Manager로서 모델클래스.objects가 제공된다. . | . # Post 모델의 기본 모델 매니저 $ Post.objects &lt;django.db.models.manager.Manager at 0x7f30a4982f90&gt; . Model Manager를 통해 해당 모델 클래스의 DB 데이터를 추가, 조회, 수정, 삭제 (CRUD)가 가능하다. | . ModelCls.objects.all() # 특정 모델의 전체 데이터 조회 ModelCls.objects.all().order_by(&#39;-id&#39;)[:10] # 특정 모델의 최근 10개 데이터 조회 ModelCls.objects.create(title=&quot;New Title&quot;) # 특정 모델의 새 Row 저장 . QuerySet . SQL을 생성해주는 인터페이스 | queryset을 통하여 별도의 SQL을 작성할 필요 없이 DB로 부터 데이터를 가져오고 추가, 수정, 삭제가 가능하다. | Model Manager를 통해 해당 Model에 대한 QuerySet을 획득한다. Post.objects.all() : “SELECT * FROM post…” 와 같은 SQL문 생성 | Posb.objects.create() : “INSERT INTO post VALUES(…)” 와 같은 SQL문 생성 | . | Chaining을 지원한다. | connection 모듈을 통해 queryset으로 만들어진 실제 sql문을 shell에서 확인할 수 있다. | . from django.db import connection ModelCls.objects.all().order_by(&#39;-id&#39;)[:10] connection.queryies[-1] . . DB 데이터 조회 (Retrieve) . AND 조건 (filter) . chaning, Lazy | . # chaining을 통해 조건1~3 이 적용된 queryset을 마지막에 리턴 queryset = 모델클래스명.objects.all() queryset = queryset.filter(조건필드1=조건값1, 조건필드2=조건값2) queryset = queryset.filter(조건필드3=조건값3) for model_instance in queryset: print(model_instance) # 화면에 출력할 때 DB에 쿼리 (lazy) . i = ignore_case (대소문자 구별 X) [] | . # 필터링 (qs1 = qs2) qs1 = Post.objects.filter(title_icontains=&#39;1&#39;, title_endswith=&#39;3&#39;) # i = ignore_case(대소문자 구별 X) qs2 = Post.objects.filter(title_icontains=&#39;1&#39;).filter(title_endswith=&#39;3&#39;) # 체이닝 . 제외조건(exclude) . # 제목에 &#39;테스트&#39;를 포함한 record를 제외한 전체 Post.objects.all().exclude(title__icontains=&#39;test&#39;) # 제목에 1을 포함하지만 3으로 끝나지 않는 record Post.objects.filter(title__icontains=&#39;1&#39;).exclude(title__endswith=&#39;3&#39;) . OR 조건(filter) . Complex lookups with Q objects : or 조건을 사용하기 위해서는 Q 객체 import가 필요하다. | . from django.db.models import Q 모델클래스명.objects.all().filter(Q(조건필드1=조건값1) | Q(조건필드2=조건값2)) # or 조건 모델클래스명.objects.all().filter(Q(조건필드1=조건값1) &amp; Q(조건필드2=조건값2)) # and 조건 . filter을 활용한 간단 검색 구현 . 포스팅 1000개 한꺼번에 만들기 | . import random for i in range(1000): status = random.choice[&#39;d&#39;, &#39;p&#39;, &#39;w&#39;]) Post.objects.create(author=&#39;몽키&#39;, title=&quot;제목 #{}&quot;.fortmat(i), content=&quot;테스트 내용 #{}&quot;.format(i), status=status) # 모델 클래스의 오브젝트 갯수확인 Post.objects.all().count() . filter를 통한 검색 구현 | . # myapp/views.py def post_list(request): qs = Post.objects.all() q = request.GET.get(&#39;q&#39;, &#39;&#39;) if q: qs = qs.filter(title__icontains=q) return render(request, &#39;blog/post_list.html&#39;, { &#39;post_list&#39;: qs, }) # blog/templates/blog/post_list.html &lt;form action=&quot;&quot; method=&quot;get&quot;&gt; &lt;input type=&quot;text&quot; name=&quot;q&quot; /&gt;&lt;input type=&quot;submit&quot; value=&quot;검색&quot; /&gt; &lt;/form&gt; . 특정필드 기준 정렬조건(Meta.ordering) . queryset의 기본 정렬은 모델 클래스 내부의 Meta.ordering 설정을 따른다. | . # myapp/models.py class Post(models.Model) ... class Meta: ordering = [&#39;-id&#39;] # id 필드 기준 내림차순 정렬, 미지정시 임의 정렬 . 모델 Meta.ordering을 무시하고 직접 정렬조건 지정도 가능하다. | . queryset = queryset.order_by(&#39;field1&#39;) # 지정 필드 오름차순 요청 queryset = queryset.order_by(&#39;-field1&#39;) # 지정 필드 내림차순 요청 queryset = queryset.order_by(&#39;field2&#39;, &#39;field3&#39;) # 1차기준, 2차기준 . 범위 조건(슬라이싱) . # 현재 queryset에서 처음10개만 가져오는 조건을 추가한 queryset queryset = queryset[:10] # 현재 queryset에서 처음10번째부터 20번째까지를 가져오는 조건을 추가한 queryset queryset = queryset[10:20] # 리스트 슬라이싱과 거의 유사하나, 역순 슬라이싱은 지원하지 않음 queryset = queryset[-10:] # AssertionError 예외 발생 # 이때는 먼저 특정 필드 기준으로 내림차순 정렬을 먼저 수행한 뒤, 슬라이싱 queryset = queryset.order_by(&#39;-id&#39;)[:10] . 지정 조건(get, first, last) . 지정 조건으로 DB로부터 데이터 Fetch | . 색깔 . queryset.get . 해당 조건에 해당하는 데이터가 1개임을 기대 0개 : 모델클래스명.DoesNotExist 예외 발생 | 1개 : 정상처리 | 2개 : 모델클래스명.MultipleObjectsReturned 예외 발생 | . | . # 지정 조건의 데이터 Row를 순회 for model_instatnce in queryset: print(model_instance) # 특정 조건의 데이터 Row 1개 Fetch model_instance = queryset.get(title=&#39;my title&#39;) . queryset.first(), queryset.last() . 지정 조건 내에서 첫번째/마지막 데이터 Row를 Fetch | 지정 조건에 맞는 데이터 Row가 없더라도, DoesNotExist 예외가 발생하지 않고, None을 반환 | . model_instance = queryset.first() # model instance 또는 None model_instance = queryset.last() # model instance 또는 None . . DB 데이터 추가 (Create) . 추가시에 필수필드 (필드 정의 시에, blank=True, null=True 혹은 디폴트 값이 지정되지 않은 필드)를 모두 지정해야한다. . IntegrityError 발생 . | shell에서 모델명 을 통해서 해당 모델의 상세 필드옵션을 확인할 수 있다. . | . 방법1. 각 Model Instance 의 save 함수를 통해 저장 . model_instance = Post(author=user.objects.all()[0], title=&#39;title&#39;, text=&#39;content&#39;) model_instance.save() . 방법2. 각 Model Manager의 create 함수를 통해 저장 . new_post = Post.objects.create(author=User.objects.get(id=1), title=&#39;title&#39;, text=&#39;content&#39;) . . DB 데이터 수정 (Update) . 방법1. 각 Model Instance 의 save 함수를 통해 저장 . 각 Model 인스턴스 별로 SQL 수행 | 다수 Row에 대해서 수행 시 성능저하 | . post_instance = Post.objects.get(id=66) post_instance.title = &#39;edit title&#39; # title 수정 post_instance.save() queryset = Post.objects.all() for post in queryset: post.tags = &#39;Python, Django&#39; post.save() # 각 Model Instance 별로 DB에 update 요청 - 성능저하 . 방법2. QuerySet의 update 함수에 업데이트할 속성값을 지정하여 일괄 수정 . 하나의 SQL 로서 동작하므로, 동작이 빠르다. | . queryset = Post.objects.all() queryset.update(title=&#39;test title&#39;) # 일괄 update 요청 . . DB 데이터 삭제(Delete) . 방법1. 각 Model Instance의 delete 함수를 호출하여 삭제 . 각 Model인스턴스 별로 SQL 수행 | 다수 Row에 대해서 수행 시 성능저하 | . post_instance = Post.objects.get(id=66) post_instance.delete() queryset = Post.objects.all() for post in queryset: post.delete() # 각 Model Instance 별로 DB에 delete 요청 - 성능저하 . 방법2. QuerySet의 delete 함수를 호출하여, 관련 데이터를 삭제 . 하나의 SQL로 동작하므로 동작이 빠르다. | . queryset = Post.objects.all() queryset.delete() # 일괄 delete 요청 .",
+    "url": "http://localhost:4000/docs/Django/11.%20%EB%AA%A8%EB%8D%B8%20queryset%EC%9D%84%20%ED%86%B5%ED%95%9C%20CRUD/",
+    "relUrl": "/docs/Django/11.%20%EB%AA%A8%EB%8D%B8%20queryset%EC%9D%84%20%ED%86%B5%ED%95%9C%20CRUD/"
+  }
+  ,"14": {
     "title": "CSS",
     "content": "",
     "url": "http://localhost:4000/docs/CSS",
     "relUrl": "/docs/CSS"
   }
-  ,"4": {
+  ,"15": {
     "title": "Database",
     "content": "",
     "url": "http://localhost:4000/docs/Database",
     "relUrl": "/docs/Database"
   }
-  ,"5": {
+  ,"16": {
     "title": "Django",
     "content": "",
     "url": "http://localhost:4000/docs/Django",
     "relUrl": "/docs/Django"
   }
-  ,"6": {
+  ,"17": {
     "title": "Git",
     "content": "",
     "url": "http://localhost:4000/docs/Git",
     "relUrl": "/docs/Git"
   }
-  ,"7": {
+  ,"18": {
     "title": "HTML",
     "content": "",
     "url": "http://localhost:4000/docs/HTML",
     "relUrl": "/docs/HTML"
   }
-  ,"8": {
-    "title": "InlineModelAdmin objects",
-    "content": "InlineModelAdmin objects . 관리자 인터페이스는 상위 모델과 동일한 페이지에서 모델을 편집 할 수 있습니다. . 예제코드) . # Instagram/app/posts/models.py from django.db import models class Author(models.Model): content = models.TextField(blank=True) class Book(models.Model): author = models.ForeignKey(Author, on_delete=models.CASCADE) . # Instagram/app/posts/admin.py from django.contrib import admin from .models import Author, Book class BookInline(admin.TabularInline): model = Book # 어느 모델을 가져올 것인지 extra = 1 # 여분 작성 항목은 몇개를 기본으로 표시할것인지 @admin.register(Author) class AuthorAdmin(admin.ModelAdmin): inlines = [ BookInline, # 해당 클래스를 인라인으로 추가한다. ] @admin.register(Book) class BookAdmin(admin.ModelAdmin): pass . 예제코드의 결과) . .",
-    "url": "http://localhost:4000/docs/Django/InlineModelAdmin%20objects/",
-    "relUrl": "/docs/Django/InlineModelAdmin%20objects/"
-  }
-  ,"9": {
+  ,"19": {
     "title": "JavaScript",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript",
     "relUrl": "/docs/JavaScript"
   }
-  ,"10": {
+  ,"20": {
     "title": "Python",
     "content": "",
     "url": "http://localhost:4000/docs/Python",
     "relUrl": "/docs/Python"
   }
-  ,"11": {
-    "title": "QuerySet를 리턴하지 않는 메소드",
-    "content": "QuerySet를 리턴하지 않는 메소드 . 위 문서는 https://docs.djangoproject.com/en/3.0/ref/models/querysets/ 를 참조하였습니다. . 다음 QuerySet 메소드는 QuerySet을 평가하고 QuerySet 이외의 것을 리턴합니다. . 이러한 메소드는 캐시를 사용하지 않습니다. (캐싱 및 Queryset 참조) . 메소드는 호출될때마다 데이터베이스를 쿼리합니다. . . 01. get() . 형태) . get(**kwargs) . 주어진 조회 매개 변수와 일치하는 객체를 반환합니다. . 이 조회 매개 변수는 필드 조회에 설명 된 형식이어야 합니다. . get()은 여러 객체를 찾은 경우 . MultipleObjectsReturned를 발생시킵니다. . MultipleObjectsReturned 예외는 모델 클래스의 속성입니다. . 지정된 매개 변수에 대해 개체를 찾지 못하면 get() 에서 DoesNotExist 예외를 발생시킵니다. 이 예외는 모델 클래스의 속성입니다. . 예제 코드) . # 예제 코드 Entry.objects.get(id=&#39;foo&#39;) # 예제 코드의 결과 raises Entrys.DoesNotExist . DoesNotExist 예외는 django.core.exceptions.ObjectDoesNotExist에서 상속되므로 여러 DoesNotExist 예외를 대상으로 할 수 있습니다. . 예제 코드) . # Post 모델에 pk=2인 인스턴스가 없다고 가정 # 예제코드 from django.core.exceptions import ObjectDoesNotExist try: post = Post.objects.get(pk=2) except ObjectDoesNotExist: print(&quot;Either the entry or blog doesn&#39;t exist.&quot;) # 예제코드 결과 Either the entry or blog doesn&#39;t exist . 쿼리 셋이 하나의 행을 반환 할 것으로 예상되면 인수없이 get()을 사용하여 해당 행의 객체를 반환 할 수 있습니다. . 예제 코드) . # 예제코드 Post.objects.get() # 예제코드 결과 &lt;Post: minjyo | 2020-01-10 05:09:29.247590+00:00&gt; . . 02. create() . 형태) . create(**kwargs) . 객체를 생성하고 한 번에 모두 저장하는 편리한 방법이다. 따라서 . . # 첫번째 예제코드 p = Person.objects.create(first_name=&quot;jyo&quot;, last_name=&quot;Min&quot;) # 두번째 예제코드 p = Person(first_name=&quot;jyo&quot;, last_name=&quot;Min&quot;) p.save(force_insert=True) . 첫번째 예제코드 와 두번째 예제코드 는 같은 동작을 한다. . . 02-1. force_insert 매개변수 . force_insert 매개 변수는 다른곳에 문서화되어 있지만 항상 새 객체가 작성된다는 의미입니다. . 그러나 모델에 설정 한 수동 기본 키 값이 포함되어 있고 해당 값이 데이터베이스에 이미 존재하는 경우 기본 키는 고유해야하므로 . IntegrityError와 함께 create() 호출이 실패합니다. 수동 기본 키를 사용하는 경우 예외를 처리 할 준비를 하십시오. . . 03. get_or_create() . 형태) . get_or_create(defaults=None, **kwargs) . 주어진 kwags로 객체를 찾는 편리한 방법이다. . (모델에 모든 필드에 대한 기본값이 있는 경우 비어 있을 수 있음), 필요한 경우 하나를 만듬 . (object, created) 튜플을 반환합니다. . 여기서 object는 검색 또는 생성 된 객체이며 created는 새 객체 생성 여부를 지정하는 부울 입니다. . 예제) . ​ 예제의 데이터베이스 기본구조) . ​ . # 예제코드1 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user,content=&quot;content1&quot;, test1=&quot;test1&quot;) # 예제코드1 결과 (&lt;Post: minjyo | 2020-01-10 12:09:43.727018+00:00&gt;, True) . ​ 예제코드1에 따른 변경된 데이터베이스 테이블) . ​ . # 예제코드2 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user,content=&quot;content2&quot;, test1=&quot;test2&quot;) # 예제코드2 결과 (&lt;Post: minjyo | 2020-01-10 12:14:32.555263+00:00&gt;, True) . ​ 예제코드2에 따른 변경된 데이터베이스 테이블) . . # 예제코드3 user=User.objects.get(pk=1) Post.objects.get_or_create(author=user, content=&quot;content2&quot;, test1=&quot;test2&quot;) # 예제코드3 결과 (&lt;Post: minjyo | 2020-01-10 12:14:32.555263+00:00&gt;, False) . ​ 예제코드3에 따른 데이터베이스(객체가 생성되지 않았기 때문에 기존 데이터베이스에서 달라진 부분없음) ) . ​ . 이는 요청이 병렬로 작성 될 때 및 중복 코드에 대한 바로 가기로 중복 오브젝트가 작성된는 것을 방지하기 위한것입니다. . try: obj = Person.objects.get(first_name=&#39;John&#39;, last_name=&#39;Lennon&#39;) except Person.DoesNotExist: obj = Person(first_name=&#39;John&#39;, last_name=&#39;Lennon&#39;, birthday=data(1940,10,9)) obj.save() . 여기서 동시 요청으로 동일한 매개 변수를 사용하여 개인을 저장하려는 여러 번의 시도가 이루어질 수 있습니다. . 이 경쟁 조건을 피하기 위해 get_or_create()를 사용하여 위 예제를 다시 작성할수 있습니다. . obj, create = Person.objects.get_or_create( first_name= &#39;John&#39;, last_name= &#39;Lennon&#39;, defaults={&#39;birthday&#39;: date(1940, 10, 9)}, ) . 선택 사항 인 defaults를 제외하고 get_or_create()에 전달 된 키워드 인수는 get() 호출에 사용됩니다. . 객체가 발견되면 get_or_create()는 해당 객체의 튜플과 False를 반환합니다. . get_or_create()를 filter()와 연결하고 Q객체를 사용하여 검색된 객체에 대해 보다 복잡한 조건을 지정할 수 있습니다. . 예를 들어 Robert 또는 Bob Marley(있는 경우)를 검색하고 그렇지 않은 경우 후자를 작성하십시오. . from django.db models import Q obj, created = Person.objects.filter( Q(first_name=&#39;Bob&#39;) | Q(first_name=&#39;Robert&#39;), ).get_or_create(last_name=&#39;Marley&#39;, defaults={&#39;first_name&#39;: &#39;Bob&#39;}) . 만약 여러 객체가 발견되면 get_or_create()는 MultipleObjectsReturned를 발생시킵니다. . 객체를 찾지 못하면 get_or_create()는 새 객체를 인스턴스화하고 저장하여 새 객체의 튜플과 True를 반환합니다. . get_or_create() 메소드는 수동으로 지정된 기본키를 사용하는 경우 create()와 유사한 오류 동작을 갖습니다. 개체를 만들어야하고 키가 이미 데이터베이스에 있으면 IntegrityError가 발생합니다. . 마지막으로 Django 뷰에서 get_or_create() 사용에 대한 단어. 특별한 이유가 없는 한 POST 요청에서만 사용해야 한다. . GET 요청은 데이터에 영향을 미치지 않아야 합니다. . 대신 페이지 요청이 데이터에 부작용이 있을 때마다 POST를 사용하십시오. 자세한 내용은 HTTP 사양의 안전한 방법을 참조하십시오. . Warning . ManyToManyField 속성 및 역관계를 통해 get_or_create ()를 사용할 수 있습니다. 이 경우 해당 관계의 컨텍스트 내에서 쿼리를 제한합니다. 일관성있게 사용하지 않으면 무결성 문제가 발생할 수 있습니다. . 모델이 다음과 같을때 . class Chapter(models.Model): title = models.CharField(max_length=255, unique=True) class Book(models.models.Model): title = models.CharField(max_length=256) chapters = models.ManyToManyField(Chapter) . 도서의 chapter 필드를 통해 get_or_create()를 사용할 수 있지만 해당 도서의 컨텍스트 내에서만 가져옵니다. . &gt;&gt;&gt; book = Book.objects.create(title=&#39;Ulysses&#39;) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Telemachus&quot;) (&lt;Chapter: Telemachus&gt;, True) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Telemachus&quot;) (&lt;Chapter: Telemachus&gt;, False) &gt;&gt;&gt; Chapter.objects.create(title=&quot;Chapter1&quot;) (&lt;Chapter: Chapter 1&gt;) &gt;&gt;&gt; book.chapters.get_or_create(title=&quot;Chapter1&quot;) # Raises IntegrityError . . exists() . QuerySet에 결과가 있으면 True를, 그렇지 않으면 False를 리턴합니다. . 가장 간단하고 빠른 방법으로 쿼리를 수행하려고 시도하지만 일반 QuerySet 쿼리와 거의 동일한 쿼리를 실행합니다. . exists()는 QuerySet의 개체 멤버 자격과 QuerySet의 개체 존재, 특히 큰 QuerySet의 컨텍스트와 관련된 검색에 유용합니다. . 고유 필드를 가진 모델이 QuerySet의 멤버인지 확인하는 가장 효율적인 방법은 다음과 같습니다. . entry = Entry.objects.get(pk=123) if some_queryset.filter(pk=entry.pk).exists(): print(&quot;Entry contained in queryset&quot;) . 전체 쿼리 집합을 평가하고 반복 해야하는 다음보다 빠르다. . if entry in some_queryset: print(&quot;Entry contained in QuerySet&quot;) . 그리고 쿼리 셋에 아이템이 포함되어 있는지 확인하려면 . if some_queryset.exists(): print(&quot;There is at least one object in some_queryset&quot;) . 위 코드가 아래 코드보다 빠르다. . if some_queryset: print(&quot;There is at least one object in some_queryset&quot;) . 그러나 크게는 아닙니다 (따라서 효율성을 높이기 위해 큰 쿼리 집합이 필요함) . 또한 some_queryset이 아직 평가되지 않았지만 어느 시점에 있다는 것을 알고 있다면 some_queryset.exists ()를 사용하면 더 많은 전반적인 작업을 수행합니다 (존재 검사에 대한 하나의 쿼리와 나중에 결과를 검색하기위한 여분의 쿼리) )를 사용하는 것보다 bool (some_queryset)을 사용하여 결과를 검색 한 다음 반환 된 것이 있는지 확인합니다. .",
-    "url": "http://localhost:4000/docs/Django/QuerySet%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/",
-    "relUrl": "/docs/Django/QuerySet%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/"
-  }
-  ,"12": {
+  ,"21": {
     "title": "TIL",
     "content": "",
     "url": "http://localhost:4000/docs/TIL",
     "relUrl": "/docs/TIL"
   }
-  ,"13": {
+  ,"22": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/buttons/",
     "relUrl": "/docs/HTML/buttons/"
   }
-  ,"14": {
+  ,"23": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/buttons/",
     "relUrl": "/docs/CSS/buttons/"
   }
-  ,"15": {
+  ,"24": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Python/buttons/",
     "relUrl": "/docs/Python/buttons/"
   }
-  ,"16": {
+  ,"25": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Database/buttons/",
     "relUrl": "/docs/Database/buttons/"
   }
-  ,"17": {
+  ,"26": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/etc/buttons/",
     "relUrl": "/docs/etc/buttons/"
   }
-  ,"18": {
+  ,"27": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/buttons/",
     "relUrl": "/docs/JavaScript/buttons/"
   }
-  ,"19": {
+  ,"28": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/buttons/",
     "relUrl": "/docs/TIL/buttons/"
   }
-  ,"20": {
+  ,"29": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Git/buttons/",
     "relUrl": "/docs/Git/buttons/"
   }
-  ,"21": {
+  ,"30": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/code/",
     "relUrl": "/docs/HTML/code/"
   }
-  ,"22": {
+  ,"31": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/code/",
     "relUrl": "/docs/CSS/code/"
   }
-  ,"23": {
+  ,"32": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Python/code/",
     "relUrl": "/docs/Python/code/"
   }
-  ,"24": {
+  ,"33": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Database/code/",
     "relUrl": "/docs/Database/code/"
   }
-  ,"25": {
+  ,"34": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/etc/code/",
     "relUrl": "/docs/etc/code/"
   }
-  ,"26": {
+  ,"35": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/code/",
     "relUrl": "/docs/JavaScript/code/"
   }
-  ,"27": {
+  ,"36": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/code/",
     "relUrl": "/docs/TIL/code/"
   }
-  ,"28": {
+  ,"37": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Git/code/",
     "relUrl": "/docs/Git/code/"
   }
-  ,"29": {
+  ,"38": {
     "title": "etc",
     "content": "",
     "url": "http://localhost:4000/docs/etc",
     "relUrl": "/docs/etc"
   }
-  ,"30": {
-    "title": "field정리",
-    "content": "Model field reference . 1. ImageFIeld . 형태 . class ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options) . | 특징 . 2.1. FileFIeld에서 모든 속성과 메소드를 상속 . 2.2. 업로드 된 객체가 유효한 이미지인지 확인 . 2.3. FileField에 사용 가능한 특수 속성 외에도 ImageField에는 높이 및 너비 속성이 추가 . 2.4. Pillow 라이브러리가 필요 . 2.5. ImageField 인스턴스는 데이터베이스에서 기본 최대 길이가 100자인 varchar 열로 만들어짐 . ​ 다른 필드와 마찬가지로 max_length 인수를 사용하여 최대 길이 변경 가능 . 2.6 이 필드의 기본 양식 위젯은 ClearableFileInput . 2.7. 이러한 속성에 대한 쿼리를 용이하게하기 위해 ImageField에는 두 개의 추가 선택적 인수가 존재 . ​ 2.7.1. ImageField.height_field . ​ 모델 인스턴스가 저장 될 때마다 이미지의 높이에 자동으로 채워지는 모델 필드의 이름 . ​ 2.7.2. ImageField.width_field . ​ 모델 인스턴스가 저장 될 때마다 이미지 너비로 자동 채워지는 모델 필드의 이름 . ​ . | 예제) . 예제코드) . # 예제코드 class User(AbstractUser) img_profile = models.ImageField(&#39;프로필이미지&#39;, blank=True), upload_to=&#39;/usersadf . | ​ 예제코드 결과) . ​ . ​ . localhost:8000/admin에서 사용자 추가되었을때 프로필 이미지 칸이 생성되는걸 확인할 수 있었고 . 장고 데이터베이스에 연결된 SQLite에서 members_user라는 테이블에 들어가 봤을때 img_profile이라는 컬럼이 추가된것을 확인할 수 있음. .",
-    "url": "http://localhost:4000/docs/Django/field%EC%A0%95%EB%A6%AC/",
-    "relUrl": "/docs/Django/field%EC%A0%95%EB%A6%AC/"
-  }
-  ,"31": {
+  ,"39": {
     "title": "Home",
     "content": "",
     "url": "http://localhost:4000/",
     "relUrl": "/"
   }
-  ,"32": {
+  ,"40": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/labels/",
     "relUrl": "/docs/HTML/labels/"
   }
-  ,"33": {
+  ,"41": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/labels/",
     "relUrl": "/docs/CSS/labels/"
   }
-  ,"34": {
+  ,"42": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Python/labels/",
     "relUrl": "/docs/Python/labels/"
   }
-  ,"35": {
+  ,"43": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Database/labels/",
     "relUrl": "/docs/Database/labels/"
   }
-  ,"36": {
+  ,"44": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/etc/labels/",
     "relUrl": "/docs/etc/labels/"
   }
-  ,"37": {
+  ,"45": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/labels/",
     "relUrl": "/docs/JavaScript/labels/"
   }
-  ,"38": {
+  ,"46": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/labels/",
     "relUrl": "/docs/TIL/labels/"
   }
-  ,"39": {
+  ,"47": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Git/labels/",
     "relUrl": "/docs/Git/labels/"
   }
-  ,"40": {
-    "title": "list_display,list_display_links정리",
-    "content": "list_display 옵션 . 각 어플리케이션의 모델의 인스턴스에서 나타낼 컬럼값을 표현 . 예시코드) . # Instagram/app/posts/admin.py from django.contrib import admin from .model import Post, PostImage, PostComment, PostLike @admin.register(Post) class PostAdmin(admin.ModelAdmin): list_display = (&#39;author&#39;, &#39;content&#39;, &#39;test1&#39;, &#39;created&#39;) . 예시 코드의 결과 사진) . . list_display_links 옵션 . 목록 내에서 링크로 지정할 필드 목록 (이를 지정하지 않으면, 첫번째 필드에만 링크가 적용) . 예시코드) . # Instagram/app/posts/admin.py from django.contrib import admin from .model import Post, PostImage, PostComment, PostLike @admin.register(Post) class PostAdmin(admin.ModelAdmin): list_display = (&#39;author&#39;, &#39;content&#39;, &#39;test1&#39;, &#39;created&#39;) list_display_links = (&#39;author&#39;, &#39;content&#39;, &#39;created&#39;) . 예시 코드의 결과 사진) . .",
-    "url": "http://localhost:4000/docs/Django/list_display,list_display_links%EC%A0%95%EB%A6%AC/",
-    "relUrl": "/docs/Django/list_display,list_display_links%EC%A0%95%EB%A6%AC/"
-  }
-  ,"41": {
+  ,"48": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/lists/",
     "relUrl": "/docs/HTML/lists/"
   }
-  ,"42": {
+  ,"49": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/lists/",
     "relUrl": "/docs/CSS/lists/"
   }
-  ,"43": {
+  ,"50": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Python/lists/",
     "relUrl": "/docs/Python/lists/"
   }
-  ,"44": {
+  ,"51": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Database/lists/",
     "relUrl": "/docs/Database/lists/"
   }
-  ,"45": {
+  ,"52": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/etc/lists/",
     "relUrl": "/docs/etc/lists/"
   }
-  ,"46": {
+  ,"53": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/lists/",
     "relUrl": "/docs/JavaScript/lists/"
   }
-  ,"47": {
+  ,"54": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/lists/",
     "relUrl": "/docs/TIL/lists/"
   }
-  ,"48": {
+  ,"55": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Git/lists/",
     "relUrl": "/docs/Git/lists/"
   }
-  ,"49": {
-    "title": "path 함수에 대해",
-    "content": "path() 함수에 대해 . urlpatterns에 포함 할 요소를 반환합니다. . 예제코드) . urlpatterns = [ path(&#39;articles/&lt;slug:title&gt;/&lt;int:section&gt;/&#39;, views.section, name=&#39;article-section&#39;), path(&#39;weblog/&#39;, include(&#39;blog.urls&#39;)), ] . 위 코드에서 . &lt;int:section&gt;은 10진수 문자열과 일치하고 값을 int로 변환합니다. . | include() 는 이 위치에 “포함” 되어야 하는 다른 URLconf 모듈에 대한 전체 Python 가져오기 경로를 취하는 함수 . 선택적으로 항목이 포함될 애플리케이션의 네임 스페이스 및 인스턴스 네임 스페이스도 지정할 수 있습니다. . |",
-    "url": "http://localhost:4000/docs/Django/path%20%ED%95%A8%EC%88%98%EC%97%90%20%EB%8C%80%ED%95%B4/",
-    "relUrl": "/docs/Django/path%20%ED%95%A8%EC%88%98%EC%97%90%20%EB%8C%80%ED%95%B4/"
-  }
-  ,"50": {
+  ,"56": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/tables/",
     "relUrl": "/docs/HTML/tables/"
   }
-  ,"51": {
+  ,"57": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/tables/",
     "relUrl": "/docs/CSS/tables/"
   }
-  ,"52": {
+  ,"58": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Python/tables/",
     "relUrl": "/docs/Python/tables/"
   }
-  ,"53": {
+  ,"59": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Database/tables/",
     "relUrl": "/docs/Database/tables/"
   }
-  ,"54": {
+  ,"60": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/etc/tables/",
     "relUrl": "/docs/etc/tables/"
   }
-  ,"55": {
+  ,"61": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/tables/",
     "relUrl": "/docs/JavaScript/tables/"
   }
-  ,"56": {
+  ,"62": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/tables/",
     "relUrl": "/docs/TIL/tables/"
   }
-  ,"57": {
+  ,"63": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Git/tables/",
     "relUrl": "/docs/Git/tables/"
   }
-  ,"58": {
+  ,"64": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/typography/",
     "relUrl": "/docs/HTML/typography/"
   }
-  ,"59": {
+  ,"65": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/typography/",
     "relUrl": "/docs/CSS/typography/"
   }
-  ,"60": {
+  ,"66": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/Python/typography/",
     "relUrl": "/docs/Python/typography/"
   }
-  ,"61": {
+  ,"67": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/Database/typography/",
     "relUrl": "/docs/Database/typography/"
   }
-  ,"62": {
+  ,"68": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/typography/",
     "relUrl": "/docs/JavaScript/typography/"
   }
-  ,"63": {
+  ,"69": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/typography/",
     "relUrl": "/docs/TIL/typography/"
-  }
-  ,"64": {
-    "title": "새로운 QuerySet을 반환하는 메소드",
-    "content": "https://docs.djangoproject.com/en/3.0/ref/models/querysets/#filter . 새로운 QuerySet을 반환하는 메소드 . Django는 QuerySet에서 반환 된 결과 유형이나 SQL 쿼리 방식을 수정하는 다양한 QuerySet 구체화 방법을 제공합니다. . 1. filter() . 형태) . filter(**kwargs) . 주어진 조회 매개 변수와 일치하는 객체를 포함하는 새로운 QuerySet을 반환합니다. . 조회 매개변수 (** kwargs)는 아래의 필드 조회에 설명 된 형식이어야 합니다. 기본 SQL 문에서 AND를 통해 여러 매개 변수가 결합됩니다. . 보다 복잡한 쿼리 (예 : OR 문이있는 쿼리)를 실행해야하는 경우 Q 개체를 사용할 수 있습니다. . 예제) . ​ 예제의 데이터베이스 테이블) . . . . &gt;&gt;&gt; post=Post.objects.get(pk=3) &gt;&gt;&gt; user=User.objects.get(pk=1) &gt;&gt;&gt; post_like_qs=PostLike.objects.filter(post=post, user=user) &gt;&gt;&gt; post_like_qs &lt;QuerySet [&lt;PostLike: PostLike object (2)&gt;]&gt; .",
-    "url": "http://localhost:4000/docs/Django/%EC%83%88%EB%A1%9C%EC%9A%B4%20QuerySet%EC%9D%84%20%EB%B0%98%ED%99%98%ED%95%98%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/",
-    "relUrl": "/docs/Django/%EC%83%88%EB%A1%9C%EC%9A%B4%20QuerySet%EC%9D%84%20%EB%B0%98%ED%99%98%ED%95%98%EB%8A%94%20%EB%A9%94%EC%86%8C%EB%93%9C/"
-  }
-  ,"65": {
-    "title": "장고 migrations 충돌시 해결방법(한곳으로 모으는거 다시 코드 확인해야함)",
-    "content": "장고 migrations 충돌시 해결방법 . members └───migrations │ 0001_initial.py │ 0002_user_img_profile.py │ 0002_user_img_file.py . 위 상황이라고 해보자, 위 상황에서 해결방법은 2가지이다. . 1. 첫번째 방법 : migrations 파일의 dependencies를 수정 및 숫자 변경 . 예시 코드) . # 0002_user_img_profile.py class Migration(migrations.Migration): dependencies = [ (&#39;members&#39;, &#39;0001_initial&#39;), ] operations = [ migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ), ] . # 0002_user_img_profile.py &gt; 0003_user_img_profile.py으로 이름 수정 class Migration(migrations.Migration): dependencies = [ # (&#39;members&#39;, &#39;0001_initial&#39;), 현재 파일이 전 0002 마이그레이션 파일을 의존하게함 (&#39;members&#39;, &#39;0002_user_img_profile.py&#39;) ] operation = [ migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ) ] . 2. 두번째 방법 : . operations를 한곳으로 몰고 operations를 한곳으로 모은 migrations를 제외한 다른 하나를 제거 . from django.db import migrations, models class Migration(migrations.Migration): dependencies = [ (&#39;members&#39;, &#39;0001_initial&#39;), ] operations = [ # 0002_user_img_profile.py 에서 가져온 부분 시작 migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;user/&#39;), ), # 0002_user_img_profile.py 에서 가져온 부분 끝 # 0002_user_img_file.py 에서 가져온 부분 시작 migrations.AddField( model_name=&#39;user&#39;, name=&#39;img_profile&#39;, field=models.ImageField(blank=True, upload_to=&#39;users/&#39;), ), # 0002_user_img_file.py 에서 가져온 부분 끝 ] .",
-    "url": "http://localhost:4000/docs/Django/%EC%9E%A5%EA%B3%A0%20migrations%20%EC%B6%A9%EB%8F%8C%EC%8B%9C%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95(%ED%95%9C%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%AA%A8%EC%9C%BC%EB%8A%94%EA%B1%B0%20%EB%8B%A4%EC%8B%9C%20%EC%BD%94%EB%93%9C%20%ED%99%95%EC%9D%B8%ED%95%B4%EC%95%BC%ED%95%A8)/",
-    "relUrl": "/docs/Django/%EC%9E%A5%EA%B3%A0%20migrations%20%EC%B6%A9%EB%8F%8C%EC%8B%9C%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95(%ED%95%9C%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%AA%A8%EC%9C%BC%EB%8A%94%EA%B1%B0%20%EB%8B%A4%EC%8B%9C%20%EC%BD%94%EB%93%9C%20%ED%99%95%EC%9D%B8%ED%95%B4%EC%95%BC%ED%95%A8)/"
-  }
-  ,"66": {
-    "title": "파이썬 패키지 환경을 쉽게 관리할 수 있도록 하는 requirements.txt",
-    "content": "파이썬 패키지 환경을 쉽게 관리할 수 있도록 하는 requirements.txt . . 자신이 구성한 환경을 requirements.txt로 만드는 명령어 | . $ pip freeze &gt; requirements.txt . . requirements.txt를 통해 지정한 환경에 설치하는 명령어 | . $ pip install -r requirements.txt .",
-    "url": "http://localhost:4000/docs/Django/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%ED%8C%A8%ED%82%A4%EC%A7%80%20%ED%99%98%EA%B2%BD%EC%9D%84%20%EC%89%BD%EA%B2%8C%20%EA%B4%80%EB%A6%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%ED%95%98%EB%8A%94%20requirements.txt/",
-    "relUrl": "/docs/Django/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%ED%8C%A8%ED%82%A4%EC%A7%80%20%ED%99%98%EA%B2%BD%EC%9D%84%20%EC%89%BD%EA%B2%8C%20%EA%B4%80%EB%A6%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%ED%95%98%EB%8A%94%20requirements.txt/"
   }
   
 }
