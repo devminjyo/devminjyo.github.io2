@@ -246,7 +246,7 @@ body { position: relative; padding-bottom: 4rem; }
 @media (min-width: 50rem) and (min-width: 31.25rem) { .navigation-list-item { font-size: 14px !important; } }
 
 .navigation-list-item .navigation-list-child-list { display: none; }
-.navigation-list-item.active .navigation-list-child-list { display: block; }
+.navigation-list-item.active .navigation-list-child-list { display: none; }
 
 .navigation-list-link { display: block; padding-top: 0.25rem; padding-bottom: 0.25rem; }
 .navigation-list-link.active { font-weight: 600; color: #f5f6fa; text-decoration: none; }
