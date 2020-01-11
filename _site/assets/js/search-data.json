@@ -2,7 +2,7 @@
   
   "0": {
     "title": "01. field정리",
-    "content": "Model field reference . 1. ImageFIeld . 형태 . class ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options) . | 특징 . 2.1. FileFIeld에서 모든 속성과 메소드를 상속 . 2.2. 업로드 된 객체가 유효한 이미지인지 확인 . 2.3. FileField에 사용 가능한 특수 속성 외에도 ImageField에는 높이 및 너비 속성이 추가 . 2.4. Pillow 라이브러리가 필요 . 2.5. ImageField 인스턴스는 데이터베이스에서 기본 최대 길이가 100자인 varchar 열로 만들어짐 . ​ 다른 필드와 마찬가지로 max_length 인수를 사용하여 최대 길이 변경 가능 . 2.6 이 필드의 기본 양식 위젯은 ClearableFileInput . 2.7. 이러한 속성에 대한 쿼리를 용이하게하기 위해 ImageField에는 두 개의 추가 선택적 인수가 존재 . ​ 2.7.1. ImageField.height_field . ​ 모델 인스턴스가 저장 될 때마다 이미지의 높이에 자동으로 채워지는 모델 필드의 이름 . ​ 2.7.2. ImageField.width_field . ​ 모델 인스턴스가 저장 될 때마다 이미지 너비로 자동 채워지는 모델 필드의 이름 . ​ . | 예제) . 예제코드) . # 예제코드 class User(AbstractUser) img_profile = models.ImageField(&#39;프로필이미지&#39;, blank=True), upload_to=&#39;/usersadf . | ​ 예제코드 결과) . ​ . ​ . localhost:8000/admin에서 사용자 추가되었을때 프로필 이미지 칸이 생성되는걸 확인할 수 있었고 . 장고 데이터베이스에 연결된 SQLite에서 members_user라는 테이블에 들어가 봤을때 img_profile이라는 컬럼이 추가된것을 확인할 수 있음. .",
+    "content": "Model field reference . 1. ImageFIeld . . 형태 . class ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options) . . | 특징 . 2.1. FileFIeld에서 모든 속성과 메소드를 상속 . 2.2. 업로드 된 객체가 유효한 이미지인지 확인 . 2.3. FileField에 사용 가능한 특수 속성 외에도 ImageField에는 높이 및 너비 속성이 추가 . 2.4. Pillow 라이브러리가 필요 . 2.5. ImageField 인스턴스는 데이터베이스에서 기본 최대 길이가 100자인 varchar 열로 만들어짐 . ​ 다른 필드와 마찬가지로 max_length 인수를 사용하여 최대 길이 변경 가능 . 2.6 이 필드의 기본 양식 위젯은 ClearableFileInput . 2.7. 이러한 속성에 대한 쿼리를 용이하게하기 위해 ImageField에는 두 개의 추가 선택적 인수가 존재 . ​ 2.7.1. ImageField.height_field . ​ 모델 인스턴스가 저장 될 때마다 이미지의 높이에 자동으로 채워지는 모델 필드의 이름 . ​ 2.7.2. ImageField.width_field . ​ 모델 인스턴스가 저장 될 때마다 이미지 너비로 자동 채워지는 모델 필드의 이름 . ​ . | 예제) . 예제코드) . # 예제코드 class User(AbstractUser) img_profile = models.ImageField(&#39;프로필이미지&#39;, blank=True), upload_to=&#39;/usersadf . ​ 예제코드 결과) . | ​ . ​ . localhost:8000/admin에서 사용자 추가되었을때 프로필 이미지 칸이 생성되는걸 확인할 수 있었고 . 장고 데이터베이스에 연결된 SQLite에서 members_user라는 테이블에 들어가 봤을때 img_profile이라는 컬럼이 추가된것을 확인할 수 있음. .",
     "url": "http://localhost:4000/docs/Django/01.%20field%EC%A0%95%EB%A6%AC/",
     "relUrl": "/docs/Django/01.%20field%EC%A0%95%EB%A6%AC/"
   }
@@ -78,337 +78,343 @@
     "url": "http://localhost:4000/docs/Django/11.%20%EB%AA%A8%EB%8D%B8%20queryset%EC%9D%84%20%ED%86%B5%ED%95%9C%20CRUD/",
     "relUrl": "/docs/Django/11.%20%EB%AA%A8%EB%8D%B8%20queryset%EC%9D%84%20%ED%86%B5%ED%95%9C%20CRUD/"
   }
-  ,"14": {
+  ,"13": {
+    "title": "12. 내장 템플릿 태그 및 필터",
+    "content": "https://docs.djangoproject.com/en/3.0/ref/templates/builtins/ . https://docs.djangoproject.com/en/3.0/ref/templates/language/#template-inheritance . 내장 템플릿 태그 및 필터 . 이 문서는 Django의 내장 템플릿 태그 및 필터에 대해 설명합니다. 사용 가능한 경우 자동 문서를 사용하는 것이 좋습니다. . 여기에는 설치된 모든 사용자 정의 태그 또는 필터에 대한 문서도 포함되므로 가능합니다. . 내장 태그 참조 . 1. extends . 이 템플릿이 부모 템플릿을 확장한다는 것을 알립니다. . 이 태그는 두 가지 방법으로 사용할 수 있습니다. . (익스텐드 base.html) (따옴표 포함)는 확장할 상위 템플릿의 이름으로 리터럴 값 “base.html”을 사용합니다. . | (익스텐드 variable) 은 variable 값을 사용합니다. 변수가 문자열로 평가되면 Django는 해당 문자열을 . 부모 템플릿의 이름으로 사용합니다. 변수가 Template 객체로 평가되면 Django는 해당 객체를 상위 템플릿으로 . 사용합니다. . | . 자세한 내용은 템플릿 상속을 참조하십시오. . 일반적으로 템플릿 이름은 템플릿 로더의 루트 디렉토리를 기준으로합니다. . 문자열 인수는 ./또는 ../로 시작하는 상대 경로일 수도 있습니다. 예를 들어, 다음 디렉토리 구조를 가정하십시오. . dir1/ template.html base2.html my/ base3.html base1.html . template.html에서 다음 경로가 유효합니다. . 익스텐드 &quot;../base1.html&quot; 익스텐드 &quot;./my/base3.html&quot; 익스텐드 &quot;./base2.html&quot; . 2. block . 자식 템플릿으로 재정의 할 수 있는 블록을 정의합니다. 자세한 내용은 템플릿 상속을 참조하십시오. . 2.1. Template inheritance .",
+    "url": "http://localhost:4000/docs/Django/12.%20%EB%82%B4%EC%9E%A5%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%ED%83%9C%EA%B7%B8%20%EB%B0%8F%20%ED%95%84%ED%84%B0/",
+    "relUrl": "/docs/Django/12.%20%EB%82%B4%EC%9E%A5%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%ED%83%9C%EA%B7%B8%20%EB%B0%8F%20%ED%95%84%ED%84%B0/"
+  }
+  ,"15": {
     "title": "CSS",
     "content": "",
     "url": "http://localhost:4000/docs/CSS",
     "relUrl": "/docs/CSS"
   }
-  ,"15": {
+  ,"16": {
     "title": "Database",
     "content": "",
     "url": "http://localhost:4000/docs/Database",
     "relUrl": "/docs/Database"
   }
-  ,"16": {
+  ,"17": {
     "title": "Django",
     "content": "",
     "url": "http://localhost:4000/docs/Django",
     "relUrl": "/docs/Django"
   }
-  ,"17": {
+  ,"18": {
     "title": "Git",
     "content": "",
     "url": "http://localhost:4000/docs/Git",
     "relUrl": "/docs/Git"
   }
-  ,"18": {
+  ,"19": {
     "title": "HTML",
     "content": "",
     "url": "http://localhost:4000/docs/HTML",
     "relUrl": "/docs/HTML"
   }
-  ,"19": {
+  ,"20": {
     "title": "JavaScript",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript",
     "relUrl": "/docs/JavaScript"
   }
-  ,"20": {
+  ,"21": {
     "title": "Python",
     "content": "",
     "url": "http://localhost:4000/docs/Python",
     "relUrl": "/docs/Python"
   }
-  ,"21": {
+  ,"22": {
     "title": "TIL",
     "content": "",
     "url": "http://localhost:4000/docs/TIL",
     "relUrl": "/docs/TIL"
   }
-  ,"22": {
+  ,"23": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/buttons/",
     "relUrl": "/docs/HTML/buttons/"
   }
-  ,"23": {
+  ,"24": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/buttons/",
     "relUrl": "/docs/CSS/buttons/"
   }
-  ,"24": {
+  ,"25": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Python/buttons/",
     "relUrl": "/docs/Python/buttons/"
   }
-  ,"25": {
+  ,"26": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Database/buttons/",
     "relUrl": "/docs/Database/buttons/"
   }
-  ,"26": {
+  ,"27": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/etc/buttons/",
     "relUrl": "/docs/etc/buttons/"
   }
-  ,"27": {
+  ,"28": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/buttons/",
     "relUrl": "/docs/JavaScript/buttons/"
   }
-  ,"28": {
+  ,"29": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/buttons/",
     "relUrl": "/docs/TIL/buttons/"
   }
-  ,"29": {
+  ,"30": {
     "title": "Buttons",
     "content": "",
     "url": "http://localhost:4000/docs/Git/buttons/",
     "relUrl": "/docs/Git/buttons/"
   }
-  ,"30": {
+  ,"31": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/code/",
     "relUrl": "/docs/HTML/code/"
   }
-  ,"31": {
+  ,"32": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/code/",
     "relUrl": "/docs/CSS/code/"
   }
-  ,"32": {
+  ,"33": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Python/code/",
     "relUrl": "/docs/Python/code/"
   }
-  ,"33": {
+  ,"34": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Database/code/",
     "relUrl": "/docs/Database/code/"
   }
-  ,"34": {
+  ,"35": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/etc/code/",
     "relUrl": "/docs/etc/code/"
   }
-  ,"35": {
+  ,"36": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/code/",
     "relUrl": "/docs/JavaScript/code/"
   }
-  ,"36": {
+  ,"37": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/code/",
     "relUrl": "/docs/TIL/code/"
   }
-  ,"37": {
+  ,"38": {
     "title": "Code",
     "content": "",
     "url": "http://localhost:4000/docs/Git/code/",
     "relUrl": "/docs/Git/code/"
   }
-  ,"38": {
+  ,"39": {
     "title": "etc",
     "content": "",
     "url": "http://localhost:4000/docs/etc",
     "relUrl": "/docs/etc"
   }
-  ,"39": {
+  ,"40": {
     "title": "Home",
     "content": "",
     "url": "http://localhost:4000/",
     "relUrl": "/"
   }
-  ,"40": {
+  ,"41": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/labels/",
     "relUrl": "/docs/HTML/labels/"
   }
-  ,"41": {
+  ,"42": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/labels/",
     "relUrl": "/docs/CSS/labels/"
   }
-  ,"42": {
+  ,"43": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Python/labels/",
     "relUrl": "/docs/Python/labels/"
   }
-  ,"43": {
+  ,"44": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Database/labels/",
     "relUrl": "/docs/Database/labels/"
   }
-  ,"44": {
+  ,"45": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/etc/labels/",
     "relUrl": "/docs/etc/labels/"
   }
-  ,"45": {
+  ,"46": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/labels/",
     "relUrl": "/docs/JavaScript/labels/"
   }
-  ,"46": {
+  ,"47": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/labels/",
     "relUrl": "/docs/TIL/labels/"
   }
-  ,"47": {
+  ,"48": {
     "title": "Labels",
     "content": "",
     "url": "http://localhost:4000/docs/Git/labels/",
     "relUrl": "/docs/Git/labels/"
   }
-  ,"48": {
+  ,"49": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/lists/",
     "relUrl": "/docs/HTML/lists/"
   }
-  ,"49": {
+  ,"50": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/lists/",
     "relUrl": "/docs/CSS/lists/"
   }
-  ,"50": {
+  ,"51": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Python/lists/",
     "relUrl": "/docs/Python/lists/"
   }
-  ,"51": {
+  ,"52": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Database/lists/",
     "relUrl": "/docs/Database/lists/"
   }
-  ,"52": {
+  ,"53": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/etc/lists/",
     "relUrl": "/docs/etc/lists/"
   }
-  ,"53": {
+  ,"54": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/lists/",
     "relUrl": "/docs/JavaScript/lists/"
   }
-  ,"54": {
+  ,"55": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/lists/",
     "relUrl": "/docs/TIL/lists/"
   }
-  ,"55": {
+  ,"56": {
     "title": "Lists",
     "content": "",
     "url": "http://localhost:4000/docs/Git/lists/",
     "relUrl": "/docs/Git/lists/"
   }
-  ,"56": {
+  ,"57": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/tables/",
     "relUrl": "/docs/HTML/tables/"
   }
-  ,"57": {
+  ,"58": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/tables/",
     "relUrl": "/docs/CSS/tables/"
   }
-  ,"58": {
+  ,"59": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Python/tables/",
     "relUrl": "/docs/Python/tables/"
   }
-  ,"59": {
+  ,"60": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Database/tables/",
     "relUrl": "/docs/Database/tables/"
   }
-  ,"60": {
+  ,"61": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/etc/tables/",
     "relUrl": "/docs/etc/tables/"
   }
-  ,"61": {
+  ,"62": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/tables/",
     "relUrl": "/docs/JavaScript/tables/"
   }
-  ,"62": {
+  ,"63": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/tables/",
     "relUrl": "/docs/TIL/tables/"
   }
-  ,"63": {
+  ,"64": {
     "title": "Tables",
     "content": "",
     "url": "http://localhost:4000/docs/Git/tables/",
     "relUrl": "/docs/Git/tables/"
   }
-  ,"64": {
+  ,"65": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/HTML/typography/",
     "relUrl": "/docs/HTML/typography/"
   }
-  ,"65": {
+  ,"66": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/CSS/typography/",
     "relUrl": "/docs/CSS/typography/"
   }
-  ,"66": {
+  ,"67": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/Python/typography/",
     "relUrl": "/docs/Python/typography/"
   }
-  ,"67": {
+  ,"68": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/Database/typography/",
     "relUrl": "/docs/Database/typography/"
   }
-  ,"68": {
+  ,"69": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/JavaScript/typography/",
     "relUrl": "/docs/JavaScript/typography/"
   }
-  ,"69": {
+  ,"70": {
     "title": "Typography",
     "content": "",
     "url": "http://localhost:4000/docs/TIL/typography/",
